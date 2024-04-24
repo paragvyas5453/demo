@@ -14,8 +14,8 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Install dependencies (if any)
-        script: 
-          sudo apt install apache2 -y
+        run: 
+         sudo apt install apache2 -y
 
       - name: SSH into EC2 and deploy
         uses: appleboy/ssh-action@master
