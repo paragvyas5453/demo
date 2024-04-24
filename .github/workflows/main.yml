@@ -25,4 +25,4 @@ jobs:
           key: ${{ secrets.EC2_PRIVATE_KEY }}
           script:
             git clone https://github.com/paragvyas5453/demo.git
-            cp -r demo/* /var/www/html/
+            cp demo/* /var/www/html/
