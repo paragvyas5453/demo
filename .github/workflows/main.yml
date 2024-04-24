@@ -1,32 +1,29 @@
-name: Deployment app
+name: Deploy to EC2
 
 on:
   push:
     branches:
-    - main
+      - main
+
 jobs:
-  clean-and-build:
+  deploy:
     runs-on: ubuntu-latest
+
     steps:
-    - name: Checkout
-      uses: actions/checkout@v1
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Configure AWS Credentials
-      uses: aws-actions/configure-AWS-credentials@v1
-      with: 
-        aws-access-key-id: ${{ secrets.AWS_Access_keyid }}
-        aws-secret-access-key: ${{ secrets.AWS_Secret_access_key }}
-        aws-region: us-east-1
+      - name: Install dependencies (if any)
+        run: 
+          sudo apt update
+          sudo apt install apache2 -y
 
-    - name: Deploy a static web app
-      run: aws s3 sync . s3://pkdemo1 --delete
-
-
-
-
-
-
-
-        
-        
-    
+      - name: SSH into EC2 and deploy
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USERNAME }}
+          key: ${{ secrets.EC2_PRIVATE_KEY }}
+          script:
+            git clone https://github.com/paragvyas5453/demo.git
+            cp -r demo/* /var/www/html/
