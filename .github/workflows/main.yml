@@ -23,6 +23,8 @@ jobs:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_PRIVATE_KEY }}
+          run:
+            rm -rf /home/ubuntu/demo
           script:
             git clone https://github.com/paragvyas5453/demo.git
           run:
