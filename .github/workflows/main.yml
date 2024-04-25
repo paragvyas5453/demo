@@ -15,7 +15,8 @@ jobs:
 
       - name: Install dependencies (if any)
         run: 
-         sudo apt install apache2 -y
+          sudo apt update |
+          sudo apt install apache2 -y
 
       - name: SSH into EC2 and deploy
         uses: appleboy/ssh-action@master
