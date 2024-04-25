@@ -25,5 +25,5 @@ jobs:
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_PRIVATE_KEY }}
           script:
-            git clone https://github.com/paragvyas5453/demo.git | 
+            git clone https://github.com/paragvyas5453/demo.git /home/ubuntu/ | 
             cp -r /home/ubuntu/demo/* /var/www/html/
